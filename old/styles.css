@@ -1,0 +1,27 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+.wrapper {
+  width: 800px;
+  height: 400px;
+  background-color: blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+.container {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: yellow;
+  font-size: 50px;
+}
