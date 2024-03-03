@@ -12,6 +12,12 @@
   </head>
   <body>
     <div class="container-lg">
+      <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Comment</li>
+        </ol>
+      </nav>
       <h1 id="comment_from_array" class="placeholder-glow">
         <span class="placeholder col-6"></span>
       </h1>
@@ -21,7 +27,7 @@
       <p id="body_from_array" class="placeholder-glow">
         <span class="placeholder col-12"></span>
       </p>
-      <a href="../index.html" class="btn btn-primary">Go back</a>
+      <!-- <a href="../index.html" class="btn btn-primary">Go back</a> -->
     </div>
     <script src="./comment.js" type="module"></script>
   </body>

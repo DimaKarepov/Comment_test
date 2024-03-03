@@ -1,0 +1,9 @@
+.page_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.form_conatainer {
+  width: 500px;
+}

@@ -1,7 +1,7 @@
-import { toDoList } from "./data/data.js";
+// import { toDoList } from "./data/data.js";
 import { init } from "./index_init.js";
 
-const runApp = () => {
+const runApp = (toDoList) => {
   const {
     selectEmail,
     inputFind,
@@ -43,4 +43,28 @@ const runApp = () => {
     renderSelectOptions(toDoList);
   });
 };
-runApp();
+// runApp();
+
+const runQuery = () => {
+  fetch("https://jsonplaceholder.typicode.com/comments")
+    .then((response) => {
+      console.log("Обещание выполнено", response);
+      return response.json();
+    })
+    .catch(() => {
+      console.log("Обещание не выполнено");
+    })
+    .finally(() => {
+      console.log("Обещание закончено");
+    })
+    .then((toDoList) => {
+      runApp(toDoList);
+    });
+};
+
+const currentUser = sessionStorage.getItem("currentUser");
+if (currentUser) {
+  runQuery();
+} else {
+  window.location.href = "login/login.html";
+}
