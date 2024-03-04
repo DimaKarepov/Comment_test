@@ -16,33 +16,41 @@ const renderCommentInfo = (comment) => {
   // const findNecessaryComment = toDoArray.find((elem) => {
   //   return elem.id === Number(id);
   // });
-  // console.log(comment);
-  if (comment.name) {
+  console.dir(comment);
+  if (comment instanceof Error) {
+    console.log("Мы попали");
+    h1Comment.innerHTML = comment.message;
+    h2Email.innerHTML = comment.stack;
+    pBody.innerHTML = "";
+  } else {
     h1Comment.innerHTML = `${comment.name}`;
     h2Email.innerHTML = `${comment.email}`;
     pBody.innerHTML = `${comment.body}`;
-  } else {
-    h1Comment.innerHTML = "Id not found";
-    h2Email.innerHTML = "";
-    pBody.innerHTML = "";
   }
+  // else if (comment.name) {
+  // } else {
+
+  // }
 };
 const runQuery = async (id) => {
   try {
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/comments/${id}`
     );
-
-    renderCommentInfo(await response.json());
-  } catch {
-    console.log("Обещание не пришло");
-  } finally {
-    // console.log("Обещание выполнилось");
+    if (response.status === 200) {
+      renderCommentInfo(await response.json());
+    } else if (response.status === 404) {
+      throw new Error("Комментарий не найден");
+    } else {
+      throw new Error("Что-то пошло не так");
+    }
+  } catch (error) {
+    renderCommentInfo(error);
   }
-  // .then((comment) => {
-  //   renderCommentInfo(comment);
-  // })
 };
+// .then((comment) => {
+//   renderCommentInfo(comment);
+// })
 
 const currentUser = sessionStorage.getItem("currentUser");
 if (currentUser) {
