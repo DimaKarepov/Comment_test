@@ -17,6 +17,7 @@ export const init = () => {
     selectEmail.innerHTML = '<option selected value="">Select email</option>';
     selectEmail.append(...optionsArray);
   };
+
   const renderCards = (toDoArray) => {
     // const filteredToDos = toDoArray.filter((element) => {
     //   return (
@@ -29,7 +30,9 @@ export const init = () => {
       return (
         result +
         `<div class="card">
-                <div class="card-header">${elem.email}</div>
+                <div class="card-header">  
+                ${elem.email}
+                </div>
                 <div class="card-body">
                   <h5 class="card-title">${elem.name}</h5>
                   <p class="card-text">
@@ -57,5 +60,25 @@ export const init = () => {
     renderCards,
     renderSelectOptions,
     filterToDoList,
+    renderLoaders,
   };
+};
+
+export const renderLoaders = () => {
+  const cardContainer = document.querySelector("#card_container");
+  cardContainer.innerHTML = `<div class="card">
+<div class="card-header placeholder-glow">
+  <span class="placeholder col-5"></span>
+</div>
+<div class="card-body placeholder-glow">
+  <h5 class="card-title"><span class="placeholder col-9"></span></h5>
+  <p class="card-text">
+    <span class="placeholder col-12"></span>
+    <span class="placeholder col-9"></span>
+  </p>
+  <a
+    class="btn btn-primary disabled placeholder col-2"
+  ></a>
+</div>
+</div>`.repeat(3);
 };

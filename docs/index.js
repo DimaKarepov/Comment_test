@@ -1,5 +1,5 @@
 // import { toDoList } from "./data/data.js";
-import { init } from "./index_init.js";
+import { init, renderLoaders } from "./index_init.js";
 
 const runApp = (toDoList) => {
   const {
@@ -45,21 +45,23 @@ const runApp = (toDoList) => {
 };
 // runApp();
 
-const runQuery = () => {
-  fetch("https://jsonplaceholder.typicode.com/comments")
-    .then((response) => {
+const runQuery = async () => {
+  renderLoaders();
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/comments"
+    );
+    if (response.status === 200) {
       console.log("Обещание выполнено", response);
-      return response.json();
-    })
-    .catch(() => {
-      console.log("Обещание не выполнено");
-    })
-    .finally(() => {
-      console.log("Обещание закончено");
-    })
-    .then((toDoList) => {
-      runApp(toDoList);
-    });
+      runApp(await response.json());
+    } else if (response.status === 404) {
+      throw new Error("Комментарий не найден");
+    } else {
+      throw new Error("Что-то пошло не так");
+    }
+  } catch (error) {
+    renderCommentInfo(error);
+  }
 };
 
 const currentUser = sessionStorage.getItem("currentUser");
